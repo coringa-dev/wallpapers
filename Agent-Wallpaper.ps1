@@ -507,7 +507,9 @@ while ($true) {
                 if ($setorExib -and $setorExib -ne $setorLocal) { Set-Content -Path $CaminhoSetor -Value $setorExib -Encoding UTF8 }
                 if ($cargoExib -and $cargoExib -ne $cargoLocal) { Set-Content -Path $CaminhoCargo -Value $cargoExib -Encoding UTF8 }
 
-                $corpoMapa = @{ nome = $nomeExib; setor = $setorExib; cargo = $cargoExib; vistoEm = @{ ".sv" = "timestamp" }; vistoPs = @{ ".sv" = "timestamp" }; versaoAplicada = [int]$estado.versaoAplicada; versaoIgnorada = [int]$estado.versaoIgnorada; versaoVideoAberta = [int]$estado.versaoVideoAberta; so = $so; agenteVersao = [int]$AgentVersao }
+                # "resgate": o para-quedas esta instalado neste PC? (coluna do painel)
+                $temResgate = Test-Path (Join-Path $PastaTrabalho "Resgate.ps1")
+                $corpoMapa = @{ nome = $nomeExib; setor = $setorExib; cargo = $cargoExib; vistoEm = @{ ".sv" = "timestamp" }; vistoPs = @{ ".sv" = "timestamp" }; versaoAplicada = [int]$estado.versaoAplicada; versaoIgnorada = [int]$estado.versaoIgnorada; versaoVideoAberta = [int]$estado.versaoVideoAberta; so = $so; agenteVersao = [int]$AgentVersao; resgate = [bool]$temResgate; versaoPs = [int]$AgentVersao }
                 if ($estado.aplicadoEm) { $corpoMapa.aplicadoEm = [long]$estado.aplicadoEm }
                 if ($estado.videoAbertoEm) { $corpoMapa.videoAbertoEm = [long]$estado.videoAbertoEm }
                 $corpoPc = $corpoMapa | ConvertTo-Json
