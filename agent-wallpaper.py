@@ -585,6 +585,9 @@ def main():
                     "versaoIgnorada": int(estado["versaoIgnorada"]),
                     "versaoVideoAberta": int(estado["versaoVideoAberta"]),
                     "so": SO, "agenteVersao": AGENT_VERSAO,
+                    # o para-quedas esta instalado neste PC? (coluna do painel)
+                    "resgate": os.path.exists(os.path.join(BASE, "resgate.sh")),
+                    "versaoLinux": AGENT_VERSAO,   # versao por agente (ver painel)
                 }
                 if estado.get("aplicadoEm"):
                     corpo["aplicadoEm"] = int(estado["aplicadoEm"])
